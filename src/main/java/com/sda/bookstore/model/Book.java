@@ -1,6 +1,8 @@
 package com.sda.bookstore.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="books")
@@ -12,6 +14,14 @@ public class Book {
 
     @Column(name="title")
     private String title;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "book_authors",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "author_id")}
+    )
+    private Set<Author> authors = new HashSet<Author>();
 
     public int getId() {
         return id;
@@ -27,5 +37,13 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
     }
 }
