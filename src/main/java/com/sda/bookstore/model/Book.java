@@ -23,6 +23,13 @@ public class Book {
     )
     private Set<Author> authors = new HashSet<Author>();
 
+    public Book() { }
+
+    public Book(String title, Set<Author> authors) {
+        this.title = title;
+        this.authors = authors;
+    }
+
     public int getId() {
         return id;
     }
